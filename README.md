@@ -43,7 +43,7 @@ IT IS DONE when you open the console in the browser and the resulting analysis l
 
 ## Website image
 
-
+![Website image](https://user-images.githubusercontent.com/1043077/200688107-9c1823ab-58f7-4bcb-81f2-9976401c7014.png)
 
 ## Technologies Used
 
