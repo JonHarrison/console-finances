@@ -122,8 +122,8 @@ function analyse_entry(m, a) {
 }
 
 function analyse_dataset() {
-    finances.forEach(function (params) {
-        analyse_entry.apply(null, params);
+    finances.forEach(function (entry) {
+        analyse_entry.apply(this, entry);
     });
 }
 
