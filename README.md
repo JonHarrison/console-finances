@@ -36,14 +36,17 @@ IT IS DONE when you open the console in the browser and the resulting analysis l
 ## Tasks Completed
 
 * Implemented the required solution in Javascript
+* Divided implementation into multiple functions
+* Used callback to iterate the finances array
+* Added multi-level debug with console.log used during development
 
 ## Challenges / Things I learnt
 
-* Used callback to iterate the finances array
+* How to implement callback in JS
 
 ## Website image
 
-
+![Website image](https://user-images.githubusercontent.com/1043077/200688107-9c1823ab-58f7-4bcb-81f2-9976401c7014.png)
 
 ## Technologies Used
 
