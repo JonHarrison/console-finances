@@ -107,11 +107,11 @@ function analyse_entry(m, a) {
         var difference = entry.amount - previous_month; // calculate difference from previous month
         if (debug_level > 1) console.log("difference: " + difference + " previous month:" + previous_month + " amount:" + entry.amount);
         if (difference > highest_increase[1]) {
-            highest_increase = [entry.month, difference];
+            highest_increase = [entry.month, entry.amount];
             if (debug_level > 2) console.log("New MAX positive");
         }
         if (difference < highest_decrease[1]) {
-            highest_decrease = [entry.month, difference];
+            highest_decrease = [entry.month, entry.amount];
             if (debug_level > 2) console.log("New MAX negative");
         }
         average_change += difference;
