@@ -1,32 +1,27 @@
 # Unit 4 Challenge: Console Finances
 
-## Overview
+## Title
 
-In this challenge, you'll be using the concepts you've learned to complete the required activity. This activity presents a real-world situation in which your newfound JavaScript skills will come in handy. You are tasked with creating code for analyzing the financial records of a company. You have been provided with a financial dataset in the `starter/index.js` file.
+Simple application that analyzes the financial records of a company using plain JavaScript.
 
-## Instructions
+## User Story
 
-1. Create a new GitHub repo called `Console-Finances`. Then, clone it to your computer.
-
-2. Copy the starter files in your local git repository.
-   
-You have been given a dataset composed of arrays with two fields, Date and Profit/Losses.
-
-Your task is to write JavaScript code that analyzes the records to calculate each of the following:
+AS a DEVELOPER<br>
+I WANT to write code that will analyse the financial records of a company<br>
+SO THAT I can calculate the required data as follows:<br>
 
 * The total number of months included in the dataset.
-
 * The net total amount of Profit/Losses over the entire period.
-
 * The average of the **changes** in Profit/Losses over the entire period.
   * You will need to track what the total change in profits are from month to month and then find the average.
   * (`Total/Number of months`)
-
 * The greatest increase in profits (date and amount) over the entire period.
-
 * The greatest decrease in losses (date and amount) over the entire period.
+* The code should print the analysis to the console.
 
-When you open your code in the browser your resulting analysis should look similar to the following:
+## Acceptance Criteria
+
+IT IS DONE when you open the console in the browser and the resulting analysis looks similar to the following:
 
   ```text
   Financial Analysis
@@ -38,57 +33,32 @@ When you open your code in the browser your resulting analysis should look simil
   Greatest Decrease in Profits: Sep-2013 ($-2196167)
   ```
 
-Your final code should print the analysis to the console.
+## Tasks Completed
 
-**Hints:**
+* Implemented the required solution in Javascript
 
-* You will need to do some research on your own for this project!
+## Challenges / Things I learnt
 
-* Remember, in order to combine strings and variables in the console you will need to use **concatenation**.
+* Used callback to iterate the finances array
 
-* How do you only print to the nearest 100th in JavaScript?
+## Website image
 
-## Grading Requirements
 
-This homework is graded based on the following criteria: 
 
-### Technical Acceptance Criteria: 40%
+## Technologies Used
 
-* Satisfies all of the above acceptance criteria.
+- HTML
+- Javascript
 
-### Deployment: 32%
+## Links
 
-* Application deployed at live URL.
+* [Link to the deployed website](https://jonharrison.github.io/console-finances/)
+* [Link to the code repository](https://github.com/JonHarrison/console-finances)
 
-* Application loads with no errors.
+## Contact
 
-* Application GitHub URL submitted.
+If you have any questions, please contact me at :
 
-* GitHub repository contains application code.
-
-### Repository Quality: 12%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for variable naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme with description, screenshot, link to deployed application.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the deployed application.
-
-* The URL of the GitHub repository that contains your code. Give the repository a unique name and include a README file that describes the project.
-
----
-
-## Copyright
-
-© 2022 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
-
+* GitHub profile : [JonHarrison](https://github.com/JonHarrison)
+* Email : [******]()
+* LinkedIn : [******]()
