@@ -88,7 +88,40 @@ var finances = [
 ];function solution() {
 ];
 
+var highest_increase = ['', 0]; // entry for highest increase in profits
+var highest_decrease = ['', 0]; // entry for highest decrease in profits
+var previous_month = 0; // profit / loss amount for the previous month
+var average_change = 0; // running average of change from month to month
+var total_months = 0; // months counter
+var total_profit_loss = 0; // total profit and loss
+var debug_level = 0; // set positive for debug
+
+function analyse_entry(m, a) {
+    let entry = { month: m, amount: a };
+
+    if (debug_level > 0) console.log("Month:" + entry.month + " Profit/Loss:" + entry.amount);
+
+    if (previous_month != 0) { // only calculate difference if we have the profit/loss from the previous month
+        var difference = entry.amount - previous_month; // calculate difference from previous month
+        if (debug_level > 1) console.log("difference: " + difference + " previous month:" + previous_month + " amount:" + entry.amount);
+        if (difference > highest_increase[1]) {
+            highest_increase = [entry.month, difference];
+            if (debug_level > 2) console.log("New MAX positive");
+        }
+        if (difference < highest_decrease[1]) {
+            highest_decrease = [entry.month, difference];
+            if (debug_level > 2) console.log("New MAX negative");
+        }
+        average_change += difference;
+    }
+    total_profit_loss += entry.amount; // running total of profit / loss
+    total_months++; // month counter
+    previous_month = entry.amount; // update previous month so next month this month will be the previous month
+}
+
 function analyse_dataset() {
+    finances.forEach(function (params) {
+        analyse_entry.apply(null, params);
     });
 }
 
