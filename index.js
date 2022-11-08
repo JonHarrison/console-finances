@@ -126,6 +126,13 @@ function analyse_dataset() {
 }
 
 function output_results() {
+    console.log("Financial Analysis");
+    console.log("----------------------------");
+    console.log("Total Months: " + total_months);
+    console.log("Total: $" + total_profit_loss);
+    console.log("Average Change: $" + (average_change / total_months).toFixed(2)); // display to 2 decimal places
+    console.log("Greatest Increase in Profits: " + highest_increase[0] + " ($" + highest_increase[1] + ")");
+    console.log("Greatest Decrease in Profits: " + highest_decrease[0] + " ($" + highest_decrease[1] + ")");
 }
 
 function solution() {
