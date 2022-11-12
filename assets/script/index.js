@@ -87,8 +87,15 @@ var finances = [
     ['Feb-2017', 671099]
 ];
 
-var highest_increase = ['', 0]; // entry for highest increase in profits
-var highest_decrease = ['', 0]; // entry for highest decrease in profits
+// given the debate in class over this challenge I have implemented three different ways of calculating the greatest increase / decrease in profits
+// given_solution calculates the output provided by Noah Hoffman, updating the highest_increase and highest_decrease with the difference
+// highest_profit_with_difference uses the difference in amount between this month and the previous month and outputs the difference
+// highest_profit_with_amount uses the difference in amount between this month and the previous month and outputs the amount
+const evaluation_methods = { given_solution:1 , highest_profit_with_difference:2, highest_profit_with_amount:3 };
+var evaluation_method = evaluation_methods.given_solution;
+
+var highest_increase = { month:'', amount:0, difference:0 }; // entry for highest increase in profits
+var highest_decrease = { month:'', amount:0, difference:0 }; // entry for highest decrease in profits
 var previous_month; // profit / loss amount for the previous month
 var average_change = 0; // running average of change from month to month
 var total_months = 0; // months counter
@@ -106,12 +113,29 @@ function analyse_entry(m, a) {
     else { // only calculate difference if we have the profit/loss from the previous month
         var difference = entry.amount - previous_month; // calculate difference from previous month
         if (debug_level > 1) console.log("difference: " + difference + " previous month:" + previous_month + " amount:" + entry.amount);
-        if (difference > highest_increase[1]) {
-            highest_increase = [entry.month, entry.amount];
+        var increase, decrease;
+        switch (evaluation_method) {
+            case evaluation_methods.given_solution:
+                increase = highest_increase.amount;
+                decrease = highest_decrease.amount;
+                break;
+            case evaluation_methods.highest_profit_with_amount:
+            case evaluation_methods.highest_profit_with_difference:
+                increase = highest_increase.difference;
+                decrease = highest_decrease.difference;
+                break;
+            default: console.log("ERROR: Unexpected evaluation method");
+        }
+        if (difference > increase) {
+            highest_increase.month = entry.month;
+            highest_increase.amount = entry.amount;
+            highest_increase.difference = difference;
             if (debug_level > 2) console.log("New MAX positive");
         }
-        if (difference < highest_decrease[1]) {
-            highest_decrease = [entry.month, entry.amount];
+        if (difference < decrease) {
+            highest_decrease.month = entry.month;
+            highest_decrease.amount = entry.amount;
+            highest_decrease.difference = difference;
             if (debug_level > 2) console.log("New MAX negative");
         }
         average_change += difference;
@@ -129,14 +153,30 @@ function analyse_dataset() {
 }
 
 function output_results() {
+    var increase, decrease;
+    switch (evaluation_method) {
+        case evaluation_methods.given_solution:
+        case evaluation_methods.highest_profit_with_amount:
+            increase = highest_increase.amount;
+            decrease = highest_decrease.amount;
+            break;
+        case evaluation_methods.highest_profit_with_difference:
+            increase = highest_increase.difference;
+            decrease = highest_decrease.difference;
+            break;
+        default:
+            console.log("ERROR: Unexpected evaluation method");
+            break;
+    }
+
     console.log(
         "Financial Analysis\n" +
         "----------------------------\n" +
         "Total Months: " + total_months + "\n" +
         "Total: $" + total_profit_loss + "\n" +
         "Average Change: $" + average_change.toFixed(2) + "\n" + // display to 2 decimal places
-        "Greatest Increase in Profits: " + highest_increase[0] + " ($" + highest_increase[1] + ")\n" +
-        "Greatest Decrease in Profits: " + highest_decrease[0] + " ($" + highest_decrease[1] + ")"
+        "Greatest Increase in Profits: " + highest_increase.month + " ($" + increase + ")\n" +
+        "Greatest Decrease in Profits: " + highest_decrease.month + " ($" + decrease + ")"
         );
 }
 
