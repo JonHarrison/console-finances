@@ -87,12 +87,26 @@ var finances = [
     ['Feb-2017', 671099]
 ];
 
+
 // given the debate in class over this challenge I have implemented three different ways of calculating the greatest increase / decrease in profits
 // given_solution calculates the output provided by Noah Hoffman, updating the highest_increase and highest_decrease with the difference
 // highest_profit_with_difference uses the difference in amount between this month and the previous month and outputs the difference
 // highest_profit_with_amount uses the difference in amount between this month and the previous month and outputs the amount
 const evaluation_methods = { given_solution:1 , highest_profit_with_difference:2, highest_profit_with_amount:3 };
 var evaluation_method = evaluation_methods.given_solution;
+
+// and four different methods of calculating the average
+const average_methods = {
+    include_first_month_average_over_all_months:1,
+    include_first_month_average_over_all_months_less_one:2,
+    exclude_first_month_average_over_all_months:3,
+    exclude_first_month_average_over_all_months_less_one:4 };
+var average_method = average_methods.include_first_month_average_over_all_months;
+
+// to get the solution given by Noah Hoffman use
+// evaluation_method = given_solution and average_method = include_first_month_average_over_all_months
+// to get the solution given by the readme use
+// evaluation_method = highest_profit_with_difference and average_method = exclude_first_month_average_over_all_months_less_one
 
 var highest_increase = { month:'', amount:0, difference:0 }; // entry for highest increase in profits
 var highest_decrease = { month:'', amount:0, difference:0 }; // entry for highest decrease in profits
@@ -108,7 +122,19 @@ function analyse_entry(m, a) {
     if (debug_level > 0) console.log("Month:" + entry.month + " Profit/Loss:" + entry.amount);
 
     if (undefined == previous_month) { // previous month is undefined so first month only
-        average_change = entry.amount; // initialise with the value for the first month
+        switch(average_method)
+        {
+            case average_methods.include_first_month_average_over_all_months:
+            case average_methods.include_first_month_average_over_all_months_less_one:
+                average_change = entry.amount; // initialise with the value for the first month
+                break;
+            case average_methods.exclude_first_month_average_over_all_months:
+            case average_methods.exclude_first_month_average_over_all_months_less_one:
+                average_change = 0;
+                break;
+            default: console.log("ERROR: Unexpected evaluation method");
+                break;
+        }
     }
     else { // only calculate difference if we have the profit/loss from the previous month
         var difference = entry.amount - previous_month; // calculate difference from previous month
@@ -125,6 +151,7 @@ function analyse_entry(m, a) {
                 decrease = highest_decrease.difference;
                 break;
             default: console.log("ERROR: Unexpected evaluation method");
+                break;
         }
         if (difference > increase) {
             highest_increase.month = entry.month;
@@ -149,7 +176,19 @@ function analyse_dataset() {
     finances.forEach(function (entry) {
         analyse_entry.apply(this, entry);
     });
-    average_change = average_change / total_months; // having traversed the array finally divide sum by total to give average
+    switch(average_method)
+    {
+        case average_methods.include_first_month_average_over_all_months:
+        case average_methods.exclude_first_month_average_over_all_months:
+            average_change = average_change / total_months; // having traversed the array finally divide sum by total to give average
+            break;
+        case average_methods.include_first_month_average_over_all_months_less_one:
+        case average_methods.exclude_first_month_average_over_all_months_less_one:
+            average_change = average_change / (total_months-1); // having traversed the array finally divide sum by total to give average
+            break;
+        default: console.log("ERROR: Unexpected evaluation method");
+            break;
+    }
 }
 
 function output_results() {
